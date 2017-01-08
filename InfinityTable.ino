@@ -56,20 +56,29 @@ void colorWipe(int color)
   }
 }
 
-int interpolateRGB(int c1, int c2, float w) {
-  float nw = 1 - w;
-  int r = R(c1) * w + R(c2) * nw;
-  int g = G(c1) * w + G(c2) * nw;
-  int b = B(c1) * w + B(c2) * nw;
+int interpolateRGB(int c1, int c2, float w, float nw) {
+  char r = ((int)(R(c1) * w + R(c2) * nw)) & 255;
+  char g = ((int)(G(c1) * w + G(c2) * nw)) & 255;
+  char b = ((int)(B(c1) * w + B(c2) * nw)) & 255;
   return RGB(r, g, b);
 }
 
 void colorFade(int color, float w) {
   for (int i=0; i < leds.numPixels(); i++) {
-    leds.setPixel(i, interpolateRGB(leds.getPixel(i), color, w));
+    leds.setPixel(i, interpolateRGB(leds.getPixel(i), color, w, 1-w));
   }
 }
 
+// Add and saturate
+void addPixel(int pixel, int color) {
+  leds.setPixel(pixel, interpolateRGB(color, leds.getPixel(pixel), 1, 1));  
+}
+
+void addPixel(int row, int col, int color) {
+  addPixel(led(row, col), color);
+}
+
+// Linear speed bounce from 0 to width-1
 int bounce(int x, int width) {
   x = x % ((width - 1) * 2);
   if (x >= width) return (width * 2 - 2 - x);
