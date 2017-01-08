@@ -13,12 +13,10 @@ void rainbow(int period, float quantum, int nSteps) {
   for (int s=0; s < nSteps; s++) {
     for (int strip = 0; strip < nStrips; strip++) {
       for (int i=0; i < ledsPerStrip; i++) {
-        // (strip % 2 == 0 ? -1 : 1)
-         leds.setPixel(strip * ledsPerStrip + i, rainbowColor(((float)i / period) + (strip / 10.0) - s * quantum));
+         pixel(strip, i, rainbowColor(((float)i / period) + (strip / 6.0) - s * quantum));
       }
-      leds.show();
-      //delayMicroseconds(delayMs);
     }
+    leds.show();
   }
 }
 

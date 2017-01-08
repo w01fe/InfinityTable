@@ -4,7 +4,7 @@ const int nStrips = 6;
 const int ledsPerStrip = 180;
 
 #define led(row, col) (row * ledsPerStrip + col)
-#define lastPixel(row, col, color)  leds.setPixel(led(row, col), color)
+#define lastPixel(row, col)  leds.getPixel(led(row, col))
 #define pixel(row, col, color)  leds.setPixel(led(row, col), color)
 
 #define R(color) ((char)(color >> 16))
