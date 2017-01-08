@@ -3,14 +3,14 @@
 const int nStrips = 6;
 const int ledsPerStrip = 180;
 
-#define led(row, col) (row * ledsPerStrip + col)
-#define lastPixel(row, col)  leds.getPixel(led(row, col))
-#define pixel(row, col, color)  leds.setPixel(led(row, col), color)
+#define led(ROW, COL) (ROW * ledsPerStrip + COL)
+#define lastPixel(ROW, COL, COLOR)  leds.setPixel(led(ROW, COL), COLOR)
+#define pixel(ROW, COL, COLOR)  leds.setPixel(led(ROW, COL), COLOR)
 
-#define R(color) ((char)(color >> 16))
-#define G(color) ((char)(color >> 8))
-#define B(color) ((char)(color))
-#define RGB(red, green, blue) ((((char)red) << 16) + (((char)green) << 8) + ((char)blue))
+#define R(COLOR) ((char)(COLOR >> 16))
+#define G(COLOR) ((char)(COLOR >> 8))
+#define B(COLOR) ((char)(COLOR))
+#define RGB(RV, GV, BV) ((((char)RV) << 16) + (((char)GV) << 8) + ((char)BV))
 
 DMAMEM int displayMemory[ledsPerStrip*nStrips];
 int drawingMemory[ledsPerStrip*nStrips];
@@ -48,7 +48,9 @@ void loop() {
 //  drawText("cabaaa");
 //  pingpong();
 //  randomBlocks();
-  alternatingCheckerboard();
+//  alternatingCheckerboard();
+//  test();
+  rainbow8(0.005, 100000);
 }
 
 void colorWipe(int color)
@@ -87,4 +89,44 @@ int bounce(int x, int width) {
   else return x;
 }
 
+// like mod but if x is negative always produces number bewteen x and m
+int wrap(int x, int m) {
+  return ((x % m) + x) % m;
+}
+
+// Set a periodic pattern (where period should divide ledsPerStrip)
+void periodic(int period, int row, int col, int color) {
+  for(int stride = 0; stride < ledsPerStrip; stride += period) {
+    pixel(row, col + stride, color);
+  }
+}
+
+// Set a periodic horizontally symmetric pattern (where period should divide ledsPerStrip/2)
+void reflected(int period, int row, int col, int color) {
+  for(int stride = 0; stride < ledsPerStrip; stride += period*2) {
+    pixel(row, col + stride, color);
+    pixel(row, period*2 - 1 - col + stride, color);
+  }
+}
+
+// Set a periodic pattern with 8-fold symmetry.
+// should only be called for col = {1, 2, 3, 3, 2, 1}
+void reflected8(int row, int col, int color) {
+  int period = 6;
+  for(int stride = 0; stride < ledsPerStrip; stride += period) {
+    leds.setPixel(row * ledsPerStrip + stride + col, color);
+    leds.setPixel((5 - row) * ledsPerStrip + stride + period - 1 - col, color);
+    leds.setPixel((5 - col) * ledsPerStrip + stride + row, color);
+    leds.setPixel(col * ledsPerStrip + stride + period - 1 - row, color);
+    leds.setPixel((5 - row) * ledsPerStrip + stride + col, color);
+    leds.setPixel(row * ledsPerStrip + stride + period - 1 - col, color);
+    leds.setPixel(col * ledsPerStrip + stride + row, color);
+    leds.setPixel((5 - col) * ledsPerStrip + stride + period - 1 - row, color);
+    // TODO: why do macros suck?
+//    pixel(row, stride + col, color);
+//    pixel(period - 1 - row, stride + period - 1 - col, color);
+//    pixel(col, stride + period - 1 - row, color);
+//    pixel(period - 1 - col, stride + row, color);
+  }
+}
 
