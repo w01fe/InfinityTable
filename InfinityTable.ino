@@ -46,7 +46,9 @@ void setup() {
 void loop() {
 //  rainbow(40, 0.05, 100000);
 //  drawText("cabaaa");
-  pingpong();
+//  pingpong();
+//  randomBlocks();
+  alternatingCheckerboard();
 }
 
 void colorWipe(int color)
