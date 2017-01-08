@@ -64,11 +64,16 @@ int interpolateRGB(int c1, int c2, float w) {
   return RGB(r, g, b);
 }
 
-void colorFade(int color, float w)
-{
+void colorFade(int color, float w) {
   for (int i=0; i < leds.numPixels(); i++) {
     leds.setPixel(i, interpolateRGB(leds.getPixel(i), color, w));
   }
+}
+
+int bounce(int x, int width) {
+  x = x % ((width - 1) * 2);
+  if (x >= width) return (width * 2 - 2 - x);
+  else return x;
 }
 
 
