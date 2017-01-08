@@ -3,6 +3,9 @@
 const int nStrips = 6;
 const int ledsPerStrip = 180;
 
+#define led(row, col)  row * ledsPerStrip + col
+#define pixel(row, col, color)  leds.setPixel(led(row, col), color)
+
 DMAMEM int displayMemory[ledsPerStrip*nStrips];
 int drawingMemory[ledsPerStrip*nStrips];
 
@@ -15,6 +18,7 @@ void setup() {
   leds.show();
 }
 
+#define BLACK  0x000000
 #define RED    0xFF0000
 #define GREEN  0x00FF00
 #define BLUE   0x0000FF
@@ -34,8 +38,9 @@ void setup() {
 //int colors[] = {RED, GREEN, BLUE, YELLOW, DIM_RED, DIM_GREEN, DIM_BLUE, DIM_YELLOW};
 
 void loop() {
-  rainbow(40, 0.05, 100000);
+//  rainbow(40, 0.05, 100000);
 //  drawText("cabaaa");
+  pingpong();
 }
 
 void colorWipe(int color)
@@ -43,6 +48,5 @@ void colorWipe(int color)
   for (int i=0; i < leds.numPixels(); i++) {
     leds.setPixel(i, color);
   }
-  leds.show();
 }
 
