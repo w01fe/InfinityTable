@@ -3,8 +3,14 @@
 const int nStrips = 6;
 const int ledsPerStrip = 180;
 
-#define led(row, col)  row * ledsPerStrip + col
+#define led(row, col) (row * ledsPerStrip + col)
+#define lastPixel(row, col, color)  leds.setPixel(led(row, col), color)
 #define pixel(row, col, color)  leds.setPixel(led(row, col), color)
+
+#define R(color) ((char)(color >> 16))
+#define G(color) ((char)(color >> 8))
+#define B(color) ((char)(color))
+#define RGB(red, green, blue) ((((char)red) << 16) + (((char)green) << 8) + ((char)blue))
 
 DMAMEM int displayMemory[ledsPerStrip*nStrips];
 int drawingMemory[ledsPerStrip*nStrips];
@@ -49,4 +55,20 @@ void colorWipe(int color)
     leds.setPixel(i, color);
   }
 }
+
+int interpolateRGB(int c1, int c2, float w) {
+  float nw = 1 - w;
+  int r = R(c1) * w + R(c2) * nw;
+  int g = G(c1) * w + G(c2) * nw;
+  int b = B(c1) * w + B(c2) * nw;
+  return RGB(r, g, b);
+}
+
+void colorFade(int color, float w)
+{
+  for (int i=0; i < leds.numPixels(); i++) {
+    leds.setPixel(i, interpolateRGB(leds.getPixel(i), color, w));
+  }
+}
+
 
