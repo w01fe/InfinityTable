@@ -20,6 +20,7 @@ const int config = WS2811_GRB | WS2811_800kHz;
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
 
 void setup() {
+  randomSeed(analogRead(A5));
   leds.begin();
   leds.show();
 }
@@ -31,6 +32,9 @@ void setup() {
 #define YELLOW 0xFFFF00
 #define PINK   0xFF1088
 #define ORANGE 0xE05800
+#define PURPLE 0xCC00E0
+#define LIGHT_BLUE 0x00EBEF
+#define BROWN  0x864C28
 #define WHITE  0xFFFFFF
 
 #define DIM_RED    0x160000
@@ -49,8 +53,9 @@ void loop() {
 //  pingpong();
 //  randomBlocks();
 //  alternatingCheckerboard();
+roulette(100000);
 //  test();
-  rainbow4(0.01, 100000, 0.3);
+//  rainbow4(0.01, 100000, 0.3);
 }
 
 void colorWipe(int color)

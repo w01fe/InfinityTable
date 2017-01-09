@@ -12,6 +12,16 @@ void drawBox(int row, int col, int color) {
   }  
 }
 
+// draw a vertical line or column
+void drawColumn(int col, int width, int color) {
+  col = col % ledsPerStrip;
+  for (int columnCount = 0; columnCount < width; columnCount++) {
+    for (int row = 0; row < nStrips; row++) {
+      pixel(row, col + columnCount, color);
+    }
+  }
+}
+
 void randomBlocks() {
   colorWipe(BLACK);
   int colors[] = {RED, GREEN, BLUE, WHITE};
