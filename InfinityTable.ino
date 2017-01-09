@@ -34,7 +34,7 @@ void setup() {
 #define ORANGE 0xE05800
 #define PURPLE 0xCC00E0
 #define LIGHT_BLUE 0x00EBEF
-#define BROWN  0x864C28
+#define BROWN  0x8E3838
 #define WHITE  0xFFFFFF
 
 #define DIM_RED    0x160000
@@ -53,7 +53,8 @@ void loop() {
 //  pingpong();
 //  randomBlocks();
 //  alternatingCheckerboard();
-roulette(100000);
+//roulette(100000);
+dicks(100000);
 //  test();
 //  rainbow4(0.01, 100000, 0.3);
 }
