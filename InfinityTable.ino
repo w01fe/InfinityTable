@@ -103,10 +103,10 @@ void periodic(int period, int row, int col, int color) {
 
 // Set a periodic horizontally symmetric pattern (where period should divide ledsPerStrip/2).
 // If period = 6, makes a 4-fold symmetric pattern.
-void reflected(int period, int row, int col, int color) {
+void reflected(int period, int offset, int row, int col, int color) {
   for(int stride = 0; stride < ledsPerStrip; stride += period*2) {
-    pixel(row, col + stride, color);
-    pixel(row, period*2 - 1 - col + stride, color);
+    pixel(row, (col + stride + offset) % ledsPerStrip, color);
+    pixel(row, (period*2 - 1 - col + stride + offset) % ledsPerStrip, color);
   }
 }
 

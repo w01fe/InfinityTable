@@ -27,7 +27,7 @@ void rainbow4(float quantum, int nSteps, float brightness) {
   for(int step = 0; step < nSteps; step++) {
     for (int row=0; row < nStrips; row++) {
      for (int col = 0; col < nStrips; col++) {
-       reflected(6, row, col, rainbowColor((row / 12.0) + (col / 12.0) - step * quantum, brightness));
+       reflected(6, step / 100, row, col, rainbowColor((row / 12.0) + (col / 12.0) - step * quantum, brightness));
      }
    }
     leds.show();

@@ -41,7 +41,7 @@ void test() {
     if ((step / 50) % 2 == 0) {
       periodic(period, bounce(step, 6), step % period, BLUE); 
     } else {
-      reflected(period, bounce(step, 6), bounce(step, period), RED);         
+      reflected(period, 0, bounce(step, 6), bounce(step, period), RED);         
     }    
     leds.show();
     delayMicroseconds(100000);
