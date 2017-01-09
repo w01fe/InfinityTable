@@ -22,6 +22,20 @@ void rainbow(int period, float quantum, int nSteps) {
   }
 }
 
+// Rainbow on 4-fold symmetric 6x6 boxes
+void rainbow4(float quantum, int nSteps, float brightness) {
+  for(int step = 0; step < nSteps; step++) {
+    for (int row=0; row < nStrips; row++) {
+     for (int col = 0; col < nStrips; col++) {
+       reflected(6, row, col, rainbowColor((row / 12.0) + (col / 12.0) - step * quantum, brightness));
+     }
+   }
+    leds.show();
+    //delayMicroseconds(20000);
+  }
+}
+
+
 void rainbow8(float quantum, int nSteps) {
   for (int s=0; s < nSteps; s++) {
     for (int strip = 0; strip < nStrips/2; strip++) {
