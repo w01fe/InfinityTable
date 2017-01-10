@@ -97,7 +97,7 @@ int bounce(int x, int width) {
 
 // like mod but if x is negative always produces number bewteen x and m
 int wrap(int x, int m) {
-  return ((x % m) + x) % m;
+  return ((x % m) + m) % m;
 }
 
 // Set a periodic pattern (where period should divide ledsPerStrip)
