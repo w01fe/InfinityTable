@@ -54,9 +54,10 @@ void loop() {
 //  randomBlocks();
 //  alternatingCheckerboard();
 //roulette(100000);
-dicks(100000);
+//  dicks(100000);
 //  test();
 //  rainbow4(0.01, 100000, 0.3);
+    pacman(100000);
 }
 
 void colorWipe(int color)
