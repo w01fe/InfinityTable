@@ -46,18 +46,18 @@ void setup() {
 #define DIM_WHITE  0x101010
 
 //int colors[] = {RED, GREEN, BLUE, YELLOW, DIM_RED, DIM_GREEN, DIM_BLUE, DIM_YELLOW};
-
+int period = 250;
 void loop() {
-//  rainbow(40, 0.05, 100000);
+  rainbow(40, 0.05, period);
 //  drawText("cabaaa");
 //  pingpong();
 //  randomBlocks();
 //  alternatingCheckerboard();
 //roulette(100000);
-//  dicks(100000);
+  dicks(period);
 //  test();
-//  rainbow4(0.01, 100000, 0.3);
-    pacman(100000);
+  rainbow4(0.01, period * 8, 0.3);
+  pacman(1);
 }
 
 void colorWipe(int color)
