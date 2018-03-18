@@ -48,16 +48,17 @@ void setup() {
 //int colors[] = {RED, GREEN, BLUE, YELLOW, DIM_RED, DIM_GREEN, DIM_BLUE, DIM_YELLOW};
 int period = 250;
 void loop() {
-  rainbow(40, 0.05, period);
+  conway(period * 16, WHITE);
+//  rainbow(40, 0.05, period);
 //  drawText("cabaaa");
 //  pingpong();
 //  randomBlocks();
 //  alternatingCheckerboard();
-//roulette(100000);
-  dicks(period);
+//  roulette(100000);
+//  dicks(period);
 //  test();
-  rainbow4(0.01, period * 8, 0.3);
-  pacman(1);
+//  rainbow4(0.01, period * 8, 0.3);
+//  pacman(1);
 }
 
 void colorWipe(int color)
@@ -74,9 +75,13 @@ int interpolateRGB(int c1, int c2, float w, float nw) {
   return RGB(r, g, b);
 }
 
+int interpolateRGB(int c1, int c2, float w) {
+  return interpolateRGB(c1, c2, w, 1 - w);
+}
+
 void colorFade(int color, float w) {
   for (int i=0; i < leds.numPixels(); i++) {
-    leds.setPixel(i, interpolateRGB(leds.getPixel(i), color, w, 1-w));
+    leds.setPixel(i, interpolateRGB(leds.getPixel(i), color, w));
   }
 }
 
