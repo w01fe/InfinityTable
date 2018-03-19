@@ -8,9 +8,6 @@ boolean isAlive(int row, int col) {
 
 void setState(int row, int col, bool state) {
   states[row][col] = state;
-  if (state) {
-    fade[row][col] = 1;
-  }
 }
 
 int numNeighborsHelper(int row, int col) {
@@ -97,6 +94,8 @@ void draw(int color, float fadeSpeed) {
       pixel(row, col, interpolateRGB(color, BLACK, fade[row][col]));
       if (!isAlive(row, col)) {
         fade[row][col] = max(fade[row][col] - fadeSpeed, 0);
+      } else { 
+        fade[row][col] = min(fade[row][col] + fadeSpeed, 1);        
       }
     }
   }
@@ -105,7 +104,7 @@ void draw(int color, float fadeSpeed) {
 void conway(int nSteps, int color) {
   randomSetup(color);
   for (int i = 0; i< nSteps; i++) {
-    if (i % 100 == 0) {
+    if (i % 50 == 0) {
       countNeighbors();
       evolve();
     }
@@ -114,8 +113,8 @@ void conway(int nSteps, int color) {
       initShip(random(ledsPerStrip), random(1));
     }
 
-    draw(color, 0.02);
+    draw(color, 0.03);
     leds.show();
-    delayMicroseconds(1000000);
+    delayMicroseconds(500);
   }
 }
