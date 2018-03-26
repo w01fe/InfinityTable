@@ -37,10 +37,10 @@ void alternatingCheckerboard() {
   for(int step = 0; step < 1000000; step++) {
     colorWipe(BLACK);
     for(int i = 0; i < ledsPerStrip/12; i++) {
-      drawBox(bounce(step, 4), step + i * 6, WHITE);
+      drawBox(bounce(step, 4), step + i * 6, (step % 3 == 0) ? WHITE : 0x888888);
     }
     leds.show();
-    delayMicroseconds(100000);
+    delayMicroseconds(500000);
   }
 }
 

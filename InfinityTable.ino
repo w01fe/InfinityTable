@@ -48,7 +48,7 @@ void setup() {
 //int colors[] = {RED, GREEN, BLUE, YELLOW, DIM_RED, DIM_GREEN, DIM_BLUE, DIM_YELLOW};
 int period = 250;
 void loop() {
-  conway(period * 16, WHITE);
+//  conway(period * 16, WHITE);
 //  rainbow(40, 0.05, period);
 //  drawText("cabaaa");
 //  pingpong();
@@ -59,6 +59,7 @@ void loop() {
 //  test();
 //  rainbow4(0.01, period * 8, 0.3);
 //  pacman(1);
+  tunnel();
 }
 
 void colorWipe(int color)
